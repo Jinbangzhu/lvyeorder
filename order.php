@@ -20,6 +20,7 @@ getCon();
 
     $result = mysql_query("SELECT * FROM lvyeorder where DATE( TIME ) = curdate() order by eatwhat");
 
+    $total;
     while ($row = mysql_fetch_array($result)) {
         echo "<tr data-eatwhat='" . $row['eatwhat'] . "' data-price='" . $row['price'] . "' >";
         echo "<td>" . $row['name'] . "</td>"
@@ -27,8 +28,9 @@ getCon();
             . "<td>" . $row['eatwhat'] . "</td>"
             . "<td>" . $row['price'] . "</td>";
         echo "</tr>";
+        $total += $row['price'];
     }
-
+    echo "<tr><td collspan='4'>总计：".$total."元</td></tr>";
     mysql_close($mysql_con);
     ?>
 </table>
